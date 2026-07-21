@@ -15,7 +15,7 @@ A [Snowflake ID](https://en.wikipedia.org/wiki/Snowflake_ID) generator library f
 | Node ID     | 10 bits | Worker/node identifier (0–1023)                   |
 | Sequence    | 12 bits | Monotonic sequence within the same ms (0–4095)    |
 
-> Customise bit allocation via `Node::new(…, nb=?, sb=?)` as long as `nb + sb ≤ 22`.
+> Customise bit allocation via `Node::new(node, epoch, nb=?, sb=?)` as long as `nb + sb ≤ 22`.
 
 ## Quick Start
 
@@ -44,8 +44,8 @@ println(id.to_base36())      // 1w7p0bgwwb28
 
 | Function | Description |
 |----------|-------------|
-| `Node::new(node, epoch, nb?, sb?)` | Create with custom epoch & bit widths |
-| `Node::new_default(node)` | Create with default epoch (`2024-09-01`) |
+| `Node::new(node, epoch, nb?, sb?)` | Custom epoch (`2026-01-01` default) & bit widths |
+| `Node::new_default(node)` | Create with default epoch (`2026-01-01`) |
 | `node.generate()` → `Snowflake` | Generate a new monotonically increasing ID |
 | `node.extract_time(id)` → `Int64` | Extract timestamp using this node's epoch & layout |
 | `node.extract_node_id(id)` → `Int64` | Extract node ID using this node's bit layout |
@@ -120,7 +120,7 @@ let id2 = Snowflake::new(raw)
 
 ```moonbit nocheck
 ///|
-default_epoch  // 1725148800000L  (2024-09-01 00:00:00 UTC)
+default_epoch  // 1767225600000L  (2026-01-01 00:00:00 UTC)
 
 ///|
 node_bits      // 10
@@ -212,7 +212,7 @@ For different workloads, use `Node::new(…, nb=?, sb=?)`:
 
 ### Epoch planning
 
-The default epoch (2024-09-01) gives **~69 years** of ID space (until ≈ 2090).
+The default epoch (2026-01-01) gives **~69 years** of ID space (until ≈ 2095).
 If you need IDs beyond that, shift the epoch forward:
 
 ```moonbit nocheck
@@ -223,9 +223,8 @@ let node = Node::new(1L, 1893456000000L).unwrap() // 2030-01-01
 ## Limitations
 
 - **Clock monotonicity**: see [Clock accuracy](#clock-accuracy) above.
-- **Max timestamp**: 41‑bit field + epoch → ≈ 69 years of ID space.
-- **Maximum timestamp**: 41 bits + default epoch (2024-09-01) → space lasts
-  until **≈ 2090** (~69 years). Adjust the epoch to shift the window.
+- **Max timestamp**: 41‑bit field + epoch (2026-01-01) → space lasts
+  until **≈ 2095** (~69 years). Adjust the epoch to shift the window.
 
 ## Development
 
