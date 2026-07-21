@@ -15,12 +15,10 @@ version = "0.1.0"
 
 readme = "README.mbt.md"
 
-repository = ""
+repository = "https://github.com/RabitLogic/snowflake"
 
 license = "Apache-2.0"
 
 keywords = [ ]
 
-preferred_target = "wasm-gc"
-
-description = ""
+description = "A snowflake ID generator library for MoonBit"
