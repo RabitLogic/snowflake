@@ -1,0 +1,5 @@
+import {
+  "RabitLogic/snowflake",
+}
+
+pkgtype(kind: "executable")

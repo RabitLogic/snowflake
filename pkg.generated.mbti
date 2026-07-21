@@ -1,0 +1,70 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "RabitLogic/snowflake"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+}
+
+// Values
+pub let default_epoch : Int64
+
+pub let node_bits : Int
+
+pub let step_bits : Int
+
+// Errors
+
+// Types and methods
+pub struct Node {
+  mut step : Int64
+  mut last_time : Int64
+  node : Int64
+  epoch : Int64
+  node_max : Int64
+  node_mask : Int64
+  step_mask : Int64
+  time_shift : Int
+  node_shift : Int
+}
+pub fn Node::extract_node_id(Self, Snowflake) -> Int64
+pub fn Node::extract_step(Self, Snowflake) -> Int64
+pub fn Node::extract_time(Self, Snowflake) -> Int64
+pub fn Node::generate(Self) -> Snowflake
+pub fn Node::new(Int64, Int64, nb? : Int, sb? : Int) -> Self?
+pub fn Node::new_default(Int64) -> Self?
+
+pub struct Snowflake {
+  val : Int64
+} derive(@debug.Debug)
+pub fn Snowflake::from_base2(String) -> Self?
+pub fn Snowflake::from_base32(String) -> Self?
+pub fn Snowflake::from_base36(String) -> Self?
+pub fn Snowflake::from_base58(String) -> Self?
+pub fn Snowflake::from_base64(String) -> Self?
+pub fn Snowflake::from_bytes(Bytes) -> Self?
+pub fn Snowflake::from_int_bytes(Bytes) -> Self?
+pub fn Snowflake::from_string(String) -> Self?
+pub fn Snowflake::new(Int64) -> Self
+pub fn Snowflake::node_id(Self) -> Int64
+pub fn Snowflake::step(Self) -> Int64
+pub fn Snowflake::time(Self) -> Int64
+pub fn Snowflake::to_base2(Self) -> String
+pub fn Snowflake::to_base32(Self) -> String
+pub fn Snowflake::to_base36(Self) -> String
+pub fn Snowflake::to_base58(Self) -> String
+pub fn Snowflake::to_base64(Self) -> String
+pub fn Snowflake::to_bytes(Self) -> Bytes
+pub fn Snowflake::to_int64(Self) -> Int64
+pub fn Snowflake::to_int_bytes(Self) -> Bytes
+pub impl Compare for Snowflake
+pub impl Eq for Snowflake
+pub impl Hash for Snowflake
+pub impl Show for Snowflake
+pub impl ToJson for Snowflake
+pub impl @json.FromJson for Snowflake
+
+// Type aliases
+
+// Traits
+
